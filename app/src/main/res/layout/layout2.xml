@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="59dp"
-        android:layout_weight="1"
-        android:text="Layout Ke-2"
-        android:textSize="50sp" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/title_layout2"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_dede"
+        android:layout_width="376dp"
+        android:layout_height="84dp"
+        android:background="@drawable/rounded_button"
+        android:text="DEDE TRIMULYA\n18/425304/TK/46999"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="298dp" />
+
+    <Button
+        android:id="@+id/btn_luqman"
+        android:layout_width="376dp"
+        android:layout_height="84dp"
+        android:background="@drawable/rounded_button"
+        android:text="LUQMAN ROFIF\n18/425314/TK/47009"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="428dp" />
+
+    <Button
+        android:id="@+id/btn_taufan"
+        android:layout_width="376dp"
+        android:layout_height="84dp"
+        android:background="@drawable/rounded_button"
+        android:text="TAUFAN BAGUS Grahita\n18/425324/TK/47109"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="552dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
