@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Biografi">
+        <activity android:name=".BioTaufan"></activity>
+        <activity android:name=".BioLuqman" />
+        <activity android:name=".BioDede" />
+        <activity android:name=".Layout2" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
