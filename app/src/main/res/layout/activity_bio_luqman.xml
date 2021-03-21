@@ -68,7 +68,7 @@
             <TextView
                 android:textSize="20dp"
                 android:textColor="@color/black"
-                android:text=": 18/425314/TK/57009"/>
+                android:text=": 18/425314/TK/47009"/>
         </TableRow>
 
         <TableRow
@@ -113,7 +113,7 @@
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Media Sosila"
+            android:text="Media Sosial"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:layout_marginLeft="16dp"
