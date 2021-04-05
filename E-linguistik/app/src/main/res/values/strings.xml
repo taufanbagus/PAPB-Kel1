@@ -10,5 +10,6 @@
     <string name="menu_home">Home</string>
     <string name="menu_translator">Translator</string>
     <string name="menu_kbbi">KBBI</string>
-    <string name="menu_history">History</string>
+    <string name="menu_history">History</string>\
+    <string name="title_layout2">Anggota Kelompok</string>
 </resources>

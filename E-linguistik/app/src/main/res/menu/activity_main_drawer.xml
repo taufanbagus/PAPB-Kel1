@@ -16,5 +16,8 @@
         <item
             android:id="@+id/nav_history"
             android:title="@string/menu_history"/>
+        <item
+            android:id="@+id/nav_aboutme"
+            android:title="About Me"/>
     </group>
 </menu>
