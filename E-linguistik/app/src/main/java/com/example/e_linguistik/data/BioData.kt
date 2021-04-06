@@ -1,5 +1,6 @@
-package com.example.e_linguistik
+package com.example.e_linguistik.data
 
+import com.example.e_linguistik.Biografi
 import com.example.e_linguistik.R
 import java.util.ArrayList
 
@@ -9,12 +10,12 @@ object BioData {
                             "Dede Trimulya")
 
     private val nimMember = arrayOf("18/425314/TK/47009",
-                            "",
-                            "")
+                            "18/425324/TK/47019",
+                            "18/425304/TK/46999")
 
     private val ttlMember = arrayOf("6 Agustus 2000",
-                            "",
-                            "")
+                            "29 Januari 2000",
+                            "25 Mei 2000")
 
     private val asalMember = arrayOf("Solo",
                             "Purwokerto",

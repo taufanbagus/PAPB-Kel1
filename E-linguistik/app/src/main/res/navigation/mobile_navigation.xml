@@ -31,7 +31,7 @@
 
     <activity
         android:id="@+id/nav_aboutme"
-        android:name="com.example.e_linguistik.AboutMe"
+        android:name="com.example.e_linguistik.ui.aboutme.AboutMe"
         android:label="About Me"
         tools:layout="@layout/activity_about_me"/>
 </navigation>
