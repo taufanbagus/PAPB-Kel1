@@ -27,7 +27,7 @@ Linguistik App adalah aplikasi android yang berguna untuk memudahkan belajar bah
   <img src="/Documentation/history.jpg" width="200" >
   <img src="/Documentation/about_me.jpg" width="200" >
   <img src="/Documentation/detail_bio.jpg" width="200" >
-  <img src="/Documentation/translator.jpg" >
+  <img src="/Documentation/translator.jpg" width="200" >
 </p>
 
 ## Lifecycle Aplikasi
