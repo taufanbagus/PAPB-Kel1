@@ -26,10 +26,11 @@ class KbbiFragment : Fragment() {
     ): View? {
         kbbiViewModel = ViewModelProvider(this).get(KbbiViewModel::class.java)
         val root = inflater.inflate(R.layout.kbbi_fragment, container, false)
+        /*
         val textView: TextView = root.findViewById(R.id.text_kbbi)
         kbbiViewModel.text.observe(viewLifecycleOwner, Observer{
             textView.text = it
-        })
+        })*/
         return root
     }
 

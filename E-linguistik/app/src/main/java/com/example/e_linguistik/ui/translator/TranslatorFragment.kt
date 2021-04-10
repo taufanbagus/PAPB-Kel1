@@ -26,10 +26,11 @@ class TranslatorFragment : Fragment() {
     ): View? {
         translatorViewModel = ViewModelProvider(this).get(TranslatorViewModel::class.java)
         val root = inflater.inflate(R.layout.translator_fragment, container, false)
+        /*
         val textView: TextView = root.findViewById(R.id.text_translator)
         translatorViewModel.text.observe(viewLifecycleOwner, Observer{
             textView.text = it
-        })
+        })*/
         return root
     }
 
