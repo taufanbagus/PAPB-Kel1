@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -26,17 +27,30 @@ class DetailBiografi : AppCompatActivity() {
         var nim: TextView = findViewById(R.id.tv_nim)
         var asal: TextView = findViewById(R.id.tv_asal)
         var ttl: TextView = findViewById(R.id.tv_ttl)
+        var ig: TextView = findViewById(R.id.tv_ig)
+        var fb: TextView = findViewById(R.id.tv_fb)
+        var linkedin: TextView = findViewById(R.id.tv_linkedin)
+        var github: TextView = findViewById(R.id.tv_github)
 
         nama.text = ": "  + biografiViewModel.detailNama
         nim.text = ": " + biografiViewModel.detailNim
         asal.text = ": " + biografiViewModel.detailAsal
         ttl.text = ": " + biografiViewModel.detailTtl
+        ig.text = ": " + biografiViewModel.detaiSosmed[0]
+        fb.text = ": " + biografiViewModel.detaiSosmed[1]
+        linkedin.text = ": " + biografiViewModel.detaiSosmed[2]
+        github.text = ": " + biografiViewModel.detaiSosmed[3]
 
         Glide.with(this)
                 .load(biografiViewModel.detailFoto)
                 .apply(RequestOptions().override(200,200))
                 .into(image)
 
+    }
+
+    override fun onDestroy() {
+        Toast.makeText(this, "Jangan lupa kunjungi sosial media kami", Toast.LENGTH_SHORT).show()
+        super.onDestroy()
     }
 
     companion object{

@@ -93,28 +93,101 @@
         </TableRow>
 
     </TableLayout>
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/title_sosmed"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/tab_bio">
-        <TextView
-            android:layout_marginTop="16dp"
+        android:layout_below="@+id/tab_bio"
+        android:text="Media Sosial"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+
+    <TableLayout
+        android:id="@+id/tab_sosmed"
+        android:layout_below="@id/title_sosmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:gravity="left"
+        android:layout_marginRight="16dp">
+
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Media Sosial"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
-        <TextView
-            android:id="@+id/sosmed"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:text="Instagram "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/tv_ig"
+                android:textSize="15dp"
+                android:textColor="@color/black" />
+        </TableRow>
+
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
-    </LinearLayout>
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:text="Facebook "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/tv_fb"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:text="LinkedIn "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/tv_linkedin"
+                android:textSize="15dp"
+                android:textColor="@color/black" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:text="Github "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/tv_github"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+        </TableRow>
+
+    </TableLayout>
 
 </RelativeLayout>

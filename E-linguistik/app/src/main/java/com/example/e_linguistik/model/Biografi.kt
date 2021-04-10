@@ -1,4 +1,4 @@
-package com.example.e_linguistik
+package com.example.e_linguistik.model
 
 data class Biografi(
     var name: String = "",

@@ -1,13 +1,12 @@
 package com.example.e_linguistik.ui.aboutme
 
 import androidx.lifecycle.ViewModel
-import com.example.e_linguistik.BioModel
-import com.example.e_linguistik.Biografi
+import com.example.e_linguistik.model.Biografi
+import com.example.e_linguistik.data.BioData
 
 class BiografiViewModel : ViewModel() {
-    private var bioModel: BioModel = BioModel()
 
-    private var listDataBio: ArrayList<Biografi> = bioModel.addData()
+    lateinit var listDataBio: ArrayList<Biografi>
 
     lateinit var detailNama: String
     lateinit var detailNim: String
@@ -17,6 +16,9 @@ class BiografiViewModel : ViewModel() {
     lateinit var detaiSosmed: Array<String>
 
     fun getBioDetail(index: Int){
+        val list = ArrayList<Biografi>()
+        list.addAll(BioData.listData)
+        listDataBio = list
         val detailBio = listDataBio[index]
 
         detailNama = detailBio.name
@@ -27,41 +29,4 @@ class BiografiViewModel : ViewModel() {
         detaiSosmed = detailBio.sosmed
     }
 
-    /*
-    private val _nama = MutableLiveData<String>().apply {
-        value = detailNama
-    }
-
-    val val_nama: LiveData<String> = _nama
-
-    private val _nim = MutableLiveData<String>().apply {
-        value = detailNim
-    }
-
-    val val_nim: LiveData<String> = _nim
-
-    private val _asal = MutableLiveData<String>().apply {
-        value = detailAsal
-    }
-
-    val val_asal: LiveData<String> = _asal
-
-    private val _ttl = MutableLiveData<String>().apply {
-        value = detailTtl
-    }
-
-    val val_ttl: LiveData<String> = _ttl
-
-    private val _foto = MutableLiveData<Int>().apply {
-        value = detailFoto
-    }
-
-    val val_foto: LiveData<Int> = _foto
-
-    private val _sosmed = MutableLiveData<Array<String>>().apply {
-        value = detaiSosmed
-    }
-
-    val val_sosmed: LiveData<Array<String>> = _sosmed
-    */
 }

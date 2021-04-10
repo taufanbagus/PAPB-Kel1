@@ -1,11 +1,11 @@
 package com.example.e_linguistik.data
 
-import com.example.e_linguistik.Biografi
+import com.example.e_linguistik.model.Biografi
 import com.example.e_linguistik.R
 import java.util.ArrayList
 
 object BioData {
-    private val nameMember = arrayOf("Luqman Rofif Muntashie",
+    private val nameMember = arrayOf("Luqman Rofif M",
                             "Taufan Bagus Grahita",
                             "Dede Trimulya")
 

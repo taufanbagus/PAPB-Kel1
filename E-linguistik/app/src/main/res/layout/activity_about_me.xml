@@ -40,7 +40,7 @@
         android:layout_height="84dp"
         android:layout_below="@+id/btn_dede"
         android:background="@drawable/rounded_button"
-        android:text="LUQMAN ROFIF\n18/425314/TK/47009"
+        android:text="LUQMAN ROFIF M\n18/425314/TK/47009"
         android:textColor="@android:color/white"
         android:textSize="20dp"
         android:layout_margin="16dp" />
