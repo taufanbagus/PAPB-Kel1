@@ -1,9 +1,9 @@
 package com.example.e_linguistik.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HistoryDatabaseDao {
@@ -12,6 +12,9 @@ interface HistoryDatabaseDao {
     suspend fun insert(history: HistoryModel)
 
     @Query("SELECT * FROM history_table ORDER BY historyId")
-    fun getAllHistory():LiveData<List<HistoryModel>>
+    fun getAllHistory():Flow<List<HistoryModel>>
+
+    @Query("DELETE FROM history_table")
+    suspend fun deleteAll()
 
 }
