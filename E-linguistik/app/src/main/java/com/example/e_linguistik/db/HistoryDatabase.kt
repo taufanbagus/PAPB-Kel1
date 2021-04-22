@@ -10,10 +10,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@Database(entities = [HistoryModel::class], version = 1, exportSchema = false)
 abstract  class HistoryDatabase:RoomDatabase(){
 
-    abstract fun historyDatabaseDao(): HistoryDatabaseDao
-
+    abstract val historyDatabaseDao: HistoryDatabaseDao
+    /*
     companion object{
 
         @Volatile
@@ -64,6 +65,31 @@ abstract  class HistoryDatabase:RoomDatabase(){
                 // Not needed if you only populate on creation.
                 historydao.deleteAll()
 
+            }
+        }
+    }
+
+     */
+
+    companion object {
+        @Volatile
+        private var INSTANCE: HistoryDatabase? = null
+
+        fun getInstance(context: Context): HistoryDatabase {
+            synchronized(this) {
+                var instance = INSTANCE
+
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                            context.applicationContext,
+                            HistoryDatabase::class.java,
+                            "history_database"
+                    )
+                            .fallbackToDestructiveMigration()
+                            .build()
+                    INSTANCE = instance
+                }
+                return instance
             }
         }
     }

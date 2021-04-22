@@ -1,28 +1,48 @@
 package com.example.e_linguistik.ui.history
 
+import android.app.Application
 import androidx.lifecycle.*
+import androidx.lifecycle.Transformations.map
+import com.example.e_linguistik.db.HistoryDatabaseDao
 import com.example.e_linguistik.db.HistoryModel
-import com.example.e_linguistik.db.HistoryRepository
 import com.example.e_linguistik.ui.translator.TranslatorViewModel
 import kotlinx.coroutines.launch
 
-class HistoryViewModel(private val repository: HistoryRepository) : ViewModel() {
+class HistoryViewModel(
+        val database:HistoryDatabaseDao,
+        application: Application) : AndroidViewModel(application) {
     // TODO: Implement the ViewModel
     private val _text = MutableLiveData<String>().apply {
         value = "This is History fragment"
     }
 
-    val text: LiveData<String> = _text
+    lateinit var hist: LiveData<List<HistoryModel>>
 
-    val allHistory: LiveData<List<HistoryModel>> = repository.all_history.asLiveData()
+
+    init {
+        getHist()
+    }
+    fun getHist(){
+        viewModelScope.launch {
+            hist = database.getAllHistory()
+        }
+    }
+
+    fun delete(){
+        viewModelScope.launch {
+            database.deleteAll()
+        }
+    }
 
 }
 
-class HistoryViewModelFactory(private val repository: HistoryRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TranslatorViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return HistoryViewModel(repository) as T
+class HistoryViewModelFactory(
+        private val dataSource: HistoryDatabaseDao,
+        private val application: Application) : ViewModelProvider.Factory {
+    @Suppress("unchecked_cast")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(HistoryViewModel::class.java)) {
+            return HistoryViewModel(dataSource, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

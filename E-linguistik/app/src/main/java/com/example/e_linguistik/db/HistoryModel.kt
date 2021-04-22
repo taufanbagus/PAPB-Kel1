@@ -10,11 +10,11 @@ data class HistoryModel(
     var historyId: Long= 0L,
 
     @ColumnInfo(name = "origin_word")
-    val originWord: String = "",
+    val originWord: String,
 
     @ColumnInfo(name = "result_word_translation")
-    val resultWordTranslation: String="",
+    val resultWordTranslation: String,
 
     @ColumnInfo(name = "type_translation")
-    val typeTranslation: String=""
+    val typeTranslation: String
 )
