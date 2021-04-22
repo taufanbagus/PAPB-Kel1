@@ -41,6 +41,7 @@ class HistoryAdapter : ListAdapter<HistoryModel, HistoryViewHolder>(HistoryDiffC
     }
 
     class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val linearTemp: LinearLayout = itemView.findViewById(R.id.ln_template_hist)
         private val tvtypehsitory: TextView = itemView.findViewById(R.id.tv_history_type)
         private val tvwordorigin: TextView = itemView.findViewById(R.id.tv_word_origin)
         private val tvwordtranslation: TextView = itemView.findViewById(R.id.tv_word_translation)
@@ -49,6 +50,12 @@ class HistoryAdapter : ListAdapter<HistoryModel, HistoryViewHolder>(HistoryDiffC
             tvtypehsitory.text = type
             tvwordorigin.text = origin
             tvwordtranslation.text = translation
+            if (type == "Translate"){
+                linearTemp.setBackgroundResource(R.drawable.shape_history_translator)
+            }
+            else{
+                linearTemp.setBackgroundResource(R.drawable.shape_history_kbbi)
+            }
         }
 
         companion object {

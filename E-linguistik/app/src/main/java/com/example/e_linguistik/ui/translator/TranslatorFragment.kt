@@ -49,7 +49,7 @@ class TranslatorFragment : Fragment() {
 
         btnTranslate.setOnClickListener {
             val input = edtTranslator.text.toString()
-            val history = HistoryModel(originWord = input,resultWordTranslation = input,typeTranslation = "translate")
+            val history = HistoryModel(originWord = input,resultWordTranslation = input,typeTranslation = "Translate")
             translatorViewModel.insert(history)
         }
 
