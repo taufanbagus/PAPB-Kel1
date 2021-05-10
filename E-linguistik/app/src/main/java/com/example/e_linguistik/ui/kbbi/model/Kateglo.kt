@@ -1,0 +1,33 @@
+package com.example.e_linguistik.ui.kbbi.model
+
+data class Kateglo(
+    val actual_phrase: Any,
+    val all_relation: List<AllRelation>,
+    val created: String,
+    val creator: Any,
+    val def_count: String,
+    val definition: List<Definition>,
+    val etymology: Any,
+    val info: Any,
+    val kbbi_updated: String,
+    val lex_class: String,
+    val lex_class_name: String,
+    val lex_class_ref: String,
+    val notes: Any,
+    val phrase: String,
+    val phrase_type: String,
+    val pronounciation: String,
+    val proverb_updated: Any,
+    val proverbs: List<Any>,
+    val ref_source: String,
+    val ref_source_name: String,
+    val reference: List<Reference>,
+    val relation: Relation,
+    val roget_class: Any,
+    val roget_name: Any,
+    val root: List<Any>,
+    val translations: List<Translation>,
+    val updated: String,
+    val updater: Any,
+    val wikipedia_updated: String
+)
