@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Bahasa Inggris ke Bahasa Indonesia :"
+            android:text="Bahasa Indonesia ke Bahasa Inggris"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -53,7 +53,6 @@
                 android:hint="Masukan kata yang ingin diterjemahkan"
                 android:scrollbars="vertical"
                 android:textSize="16sp" />
-
         </LinearLayout>
 
         <Button
@@ -86,10 +85,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvListTranslation1"
+            <TextView
+                android:id="@+id/rvListTranslation"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="match_parent"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
                 android:clipToPadding="false" />
 
         </LinearLayout>
