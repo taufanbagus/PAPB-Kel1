@@ -74,6 +74,7 @@ class TranslatorFragment : Fragment() {
                     translatorResult = res.data.result
                 }
             })
+            Log.e("translateData","hasil translate" + translatorResult)
             val history = HistoryModel(originWord = input,resultWordTranslation = translatorResult,typeTranslation = "Translate")
             translatorViewModel.insert(history)
         }

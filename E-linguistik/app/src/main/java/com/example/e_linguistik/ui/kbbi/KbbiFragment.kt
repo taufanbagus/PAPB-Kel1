@@ -83,7 +83,7 @@ class KbbiFragment : Fragment() {
                 }
             })
 
-
+            Log.e("KBBIData","hasil translate" + kbbiResult)
             val history = HistoryModel(originWord = value, resultWordTranslation = kbbiResult, typeTranslation = "KBBI")
             kbbiViewModel.insert(history)
         }
