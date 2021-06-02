@@ -16,8 +16,7 @@ class ELinguistikApp: Application() {
         startKoin {
             androidLogger(Level.NONE)
             androidContext(this@ELinguistikApp)
-            modules(listOf(translatorClient, kbbiClient, databaseApp
-            ))
+            modules(listOf(translatorClient, kbbiClient, databaseApp))
         }
     }
 }

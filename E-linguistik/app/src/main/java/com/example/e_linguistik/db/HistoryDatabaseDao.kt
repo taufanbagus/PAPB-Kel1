@@ -17,10 +17,16 @@ interface HistoryDatabaseDao {
     @Update
     fun update(historyData: HistoryModel)
 
-    @Query("SELECT * FROM history_table ORDER BY historyId")
+    @Query("SELECT * FROM history_table ORDER BY historyId DESC")
     fun getAllHistory():LiveData<List<HistoryModel>>
 
     @Query("DELETE FROM history_table")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM history_table WHERE origin_word LIKE :word AND type_translation LIKE :type")
+    fun getSpecificValue(word: String, type: String): LiveData<HistoryModel>
+
+    @Query("DELETE FROM history_table WHERE origin_word LIKE :word")
+    suspend fun deletSpecificValue(word: String)
 
 }

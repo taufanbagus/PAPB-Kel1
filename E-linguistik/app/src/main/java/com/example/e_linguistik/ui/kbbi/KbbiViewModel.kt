@@ -11,18 +11,18 @@ class KbbiViewModel(
         val database: HistoryDatabaseDao,
         application: Application):AndroidViewModel(application){
 
-    // TODO: Implement the ViewModel
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is KBBI fragment"
-    }
-
-    val text: LiveData<String> = _text
-
     fun insert(history: HistoryModel) {
         viewModelScope.launch {
-            database.insert(history)
+            val check = database.getSpecificValue(history.originWord, "KBBI")
+            if (check == null){
+                database.insert(history)
+            } else {
+                database.deletSpecificValue(history.originWord)
+                database.insert(history)
+            }
         }
     }
+
 }
 
 class KBBIViewModelFactory(

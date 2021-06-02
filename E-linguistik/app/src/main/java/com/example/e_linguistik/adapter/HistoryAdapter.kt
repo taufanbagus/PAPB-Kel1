@@ -72,11 +72,11 @@ class HistoryAdapter : ListAdapter<HistoryModel, HistoryViewHolder>(HistoryDiffC
 
 class HistoryDiffCallback : DiffUtil.ItemCallback<HistoryModel>(){
     override fun areItemsTheSame(oldItem: HistoryModel, newItem: HistoryModel): Boolean {
-        return oldItem.historyId == newItem.historyId
+        return oldItem.originWord == newItem.originWord
     }
 
     override fun areContentsTheSame(oldItem: HistoryModel, newItem: HistoryModel): Boolean {
-        TODO("Not yet implemented")
+        return oldItem.originWord == newItem.originWord
     }
 }
 

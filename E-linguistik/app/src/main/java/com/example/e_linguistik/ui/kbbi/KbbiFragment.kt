@@ -32,6 +32,7 @@ class KbbiFragment : Fragment() {
     }
 
     private lateinit var kbbiViewModel: KbbiViewModel
+    private val a = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,6 +87,14 @@ class KbbiFragment : Fragment() {
             })
 
             Log.e("KBBIData","hasil translate" + kbbiResult)
+            //kbbiViewModel.getBaseOnValue("minum")
+
+            //kbbiViewModel.cekWord.observe(viewLifecycleOwner, Observer {
+                //a = it.originWord
+            //    Log.e("cek query khusus", it.toString())
+            //})
+
+            //Log.e("cek query khusus", a)
             val history = HistoryModel(originWord = value, resultWordTranslation = kbbiResult, typeTranslation = "KBBI")
             kbbiViewModel.insert(history)
         }
@@ -95,11 +104,6 @@ class KbbiFragment : Fragment() {
 //
 //        }
 
-        /*
-        val textView: TextView = root.findViewById(R.id.text_kbbi)
-        kbbiViewModel.text.observe(viewLifecycleOwner, Observer{
-            textView.text = it
-        })*/
         return root
     }
 

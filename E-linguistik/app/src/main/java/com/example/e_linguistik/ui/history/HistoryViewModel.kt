@@ -12,12 +12,8 @@ class HistoryViewModel(
         val database:HistoryDatabaseDao,
         application: Application) : AndroidViewModel(application) {
     // TODO: Implement the ViewModel
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is History fragment"
-    }
 
     lateinit var hist: LiveData<List<HistoryModel>>
-
 
     init {
         getHist()
