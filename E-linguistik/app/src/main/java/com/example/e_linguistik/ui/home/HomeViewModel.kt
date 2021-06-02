@@ -20,13 +20,8 @@ import java.io.InputStreamReader
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
-
-    lateinit var listData : List<String>
-    //var listData = ArrayList<String>()
+    var dataTransToDay = MutableLiveData<String>()
+    var dataKbbiToDay = MutableLiveData<String>()
 
     var dataResultTrans = MutableLiveData<String>()
     var dataResultKbbi = MutableLiveData<String>()
@@ -34,9 +29,10 @@ class HomeViewModel : ViewModel() {
     val translatorClient = Dependencies().TranslatorKoin
     val kbbiClient = Dependencies().kbbiKoin
 
-    fun translateWord(input: String){
+    fun translateWord(number: Int){
         viewModelScope.launch{
-            val resultTranslatorData = translatorClient.getData("google", input, "en")
+            dataTransToDay.value = listWordGroupData[number]
+            val resultTranslatorData = translatorClient.getData("google", listWordGroupData[number], "en")
             resultTranslatorData.enqueue(object : Callback<TranslatorData?> {
                 override fun onFailure(call: Call<TranslatorData?>, t: Throwable) {
                     Log.e("translatorData", "onFailure: "+t.message)
@@ -44,7 +40,7 @@ class HomeViewModel : ViewModel() {
 
                 override fun onResponse(call: Call<TranslatorData?>, response: Response<TranslatorData?>) {
                     val res = response.body()!!
-                    Log.e("cek",input)
+                    Log.e("cek",listWordGroupData[number])
                     //tvTransWordToday.text = res.data.result
                     Log.e("cek",res.data.result)
                     dataResultTrans.value = res.data.result
@@ -53,12 +49,17 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun translateUsingKBBI(input: String){
+    fun translateUsingKBBI(number: Int){
         viewModelScope.launch {
-            val resulKbbiData = kbbiClient.getData("json", input)
+            dataKbbiToDay.value = listWordGroupData[number]
+            val resulKbbiData = kbbiClient.getData("json", listWordGroupData[number])
             resulKbbiData.enqueue(object : Callback<KbbiData?> {
                 override fun onFailure(call: Call<KbbiData?>, t: Throwable) {
                     Log.e("kbbiData", "onFailure: "+t.message)
+                    if (t.message.toString() == "Use JsonReader.setLenient(true) to accept malformed JSON at line 1 column 1 path $"){
+                        val ranNum = (0..13768).random()
+                        translateUsingKBBI(ranNum)
+                    }
                 }
 
                 override fun onResponse(call: Call<KbbiData?>, response: Response<KbbiData?>) {
@@ -69,7 +70,7 @@ class HomeViewModel : ViewModel() {
                         kbbistringBuilder.append(kbbiDef.def_text)
                         kbbistringBuilder.append(".\n")
                     }
-                    Log.e("cek kbbi",input)
+                    Log.e("cek kbbi", listWordGroupData[number])
                     Log.e("cek kbbi",kbbistringBuilder.toString())
                     dataResultKbbi.value = kbbistringBuilder.toString()
                 }
@@ -77,32 +78,14 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun readDataToDay(activity: MainActivity){
-        //val fileName = "corpus.txt"
-        //val inputString = context.assets.open(fileName).bufferedReader().use { it.readText() }
-        val bufferedReader: BufferedReader = File("src/main/assets/corpus.txt").bufferedReader()
-        val inputString = bufferedReader.use { it.readText() }
-
-        //val label: MutableList<String> = ArrayList()
-        //val reader = BufferedReader(InputStreamReader(activity.getAssets().open("corpus.txt")))
-        //var line: String
-        //while (reader.readLine().also { line = it } != null) {
-        //    listData.add(line)
-        //}
-        //reader.close()
-        listData= inputString.split("\n")
-        //fun readAsset(context: Context, fileName: String): String =
-        //    context
-        //        .assets
-        //        .open(fileName)
-        //        .bufferedReader()
-        //        .use(BufferedReader::readText)
-    }
 
     fun getDataToDay(){
-        val ranNum = (0..79039).random()
-        translateWord(listWordGroupData[ranNum].split(" ")[0])
-        translateUsingKBBI(listWordGroupData[ranNum].split(" ")[0])
+        val ranNum = (0..13768).random()
+
+        Log.e("Random number", ranNum.toString())
+
+        translateWord(ranNum)
+        translateUsingKBBI(ranNum)
     }
 
 }

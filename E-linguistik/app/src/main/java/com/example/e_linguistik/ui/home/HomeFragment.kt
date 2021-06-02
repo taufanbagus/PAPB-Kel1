@@ -32,38 +32,28 @@ class HomeFragment : Fragment() {
         tvKbbiToday = root.findViewById(R.id.tv_kbbitoday)
         tvTransKbbiToday = root.findViewById(R.id.tv_transkbbiwordtoday)
 
-        //homeViewModel.readDataToDay(MainActivity())
         return root
     }
 
     override fun onResume() {
         super.onResume()
-        val vocab = arrayOf("Father","Mother","Children","Uncle","Aunt")
-        val transVocab = arrayOf("Ayah","Ibu","Anak-anak","Paman","Bibi")
-        val kbbi = arrayOf("Gunting","Pena","Pensil","Penghapus","Penggaris")
-        val transKbbi = arrayOf("perkakas untuk memotong kain (rambut dan sebagainya)",
-                        "alat untuk menulis dengan tinta, dibuat dari baja dan sebagainya yang runcing dan belah",
-                        "alat tulis berupa kayu kecil bulat berisi arang keras",
-                        "alat untuk menghapus tulisan pada papan tulis dan sebagainya",
-                        "alat untuk membuat garis")
-        val ranNumb = (0..4).random()
-
-        //homeViewModel.translateWord(transVocab[1])
-        //homeViewModel.translateUsingKBBI(kbbi[1])
 
         homeViewModel.getDataToDay()
 
         homeViewModel.dataResultTrans.observe(viewLifecycleOwner, Observer {
             tvTransWordToday.text = it
         })
+
         homeViewModel.dataResultKbbi.observe(viewLifecycleOwner, Observer {
             tvTransKbbiToday.text = it
         })
 
+        homeViewModel.dataKbbiToDay.observe(viewLifecycleOwner, Observer {
+            tvKbbiToday.text = it
+        })
 
-        tvWordtoday.text = transVocab[1]
-        //tvTransWordToday.text = transVocab[ranNumb]
-        tvKbbiToday.text = kbbi[1]
-        //tvTransKbbiToday.text = transKbbi[ranNumb]
+        homeViewModel.dataTransToDay.observe(viewLifecycleOwner, Observer {
+            tvWordtoday.text = it
+        })
     }
 }

@@ -100,7 +100,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Gunting"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
@@ -111,8 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="8dp"
-                    android:textColor="@color/white"
-                    android:text="perkakas untuk memotong kain (rambut dan sebagainya)"/>
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
