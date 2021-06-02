@@ -2,12 +2,16 @@ package com.example.e_linguistik
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationCompat
@@ -33,6 +37,10 @@ class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    companion object {
+        private const val JOB_ID = 10
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,12 +63,48 @@ class MainActivity : AppCompatActivity(){
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_home, R.id.nav_translator, R.id.nav_kbbi, R.id.nav_history), drawerLayout)
 
-        var notifReminderReceiver = NotifReminderReceiver()
-        notifReminderReceiver.setRepeatingAlarm(this)
-        Log.e("set notif","notif berhasil di set")
-
+        //var notifReminderReceiver = NotifReminderReceiver()
+        //notifReminderReceiver.setRepeatingAlarm(this)
+        //Log.e("set notif","notif berhasil di set")
+        //startJob()
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun startJob() {
+        if (isJobRunning(this)) {
+            return
+        }
+        val mServiceComponent = ComponentName(this, DailyNotifJobService::class.java)
+
+        val builder = JobInfo.Builder(JOB_ID, mServiceComponent)
+       // builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+        builder.setRequiresDeviceIdle(false)
+        builder.setRequiresCharging(false)
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            builder.setPeriodic(60000) //15 menit
+        } else {
+            builder.setPeriodic(60000) //3 menit
+        }
+
+        val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+        scheduler.schedule(builder.build())
+    }
+
+    private fun isJobRunning(context: Context): Boolean {
+        var isScheduled = false
+
+        val scheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+
+        for (jobInfo in scheduler.allPendingJobs) {
+            if (jobInfo.id == JOB_ID) {
+                isScheduled = true
+                break
+            }
+        }
+
+        return isScheduled
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
