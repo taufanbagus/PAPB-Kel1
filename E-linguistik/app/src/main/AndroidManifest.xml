@@ -11,7 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ELinguistik">
-        <activity android:name=".ui.aboutme.DetailBiografi"></activity>
+        <receiver
+            android:name=".NotifReminderReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+
+        <activity android:name=".ui.aboutme.DetailBiografi" />
         <activity android:name=".ui.aboutme.AboutMe" />
         <activity
             android:name=".MainActivity"

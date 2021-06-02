@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
                         "alat tulis berupa kayu kecil bulat berisi arang keras",
                         "alat untuk menghapus tulisan pada papan tulis dan sebagainya",
                         "alat untuk membuat garis")
-        val ranNumb = (0..5).random()
+        val ranNumb = (0..4).random()
         tvWordtoday.text = vocab[ranNumb]
         tvTransWordToday.text = transVocab[ranNumb]
         tvKbbiToday.text = kbbi[ranNumb]
