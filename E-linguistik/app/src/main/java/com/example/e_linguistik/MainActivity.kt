@@ -1,5 +1,6 @@
 package com.example.e_linguistik
 
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.job.JobInfo
@@ -25,12 +26,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.e_linguistik.data.WordGroup.listWordGroupData
 import com.example.e_linguistik.ui.history.HistoryFragment
 import com.example.e_linguistik.ui.home.HomeFragment
 import com.example.e_linguistik.ui.translator.TranslatorFragment
 import com.example.e_linguistik.ui.translator.TranslatorViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 class MainActivity : AppCompatActivity(){
@@ -67,8 +71,20 @@ class MainActivity : AppCompatActivity(){
         //notifReminderReceiver.setRepeatingAlarm(this)
         //Log.e("set notif","notif berhasil di set")
         //startJob()
+        readTxtfile(this)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun readTxtfile(activity: Activity) {
+        //val label: MutableList<String> = ArrayList()
+        val reader = BufferedReader(InputStreamReader(activity.getAssets().open("corpus.txt")))
+        val inputString = reader.use { it.readText() }
+        var line: String
+        //while (reader.readLine().also { line = it } != null) {
+        //   listWordGroupData.add(line)
+        //}
+        listWordGroupData = inputString.split("\n")
     }
 
     private fun startJob() {

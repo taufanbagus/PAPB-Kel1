@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.e_linguistik.MainActivity
 import com.example.e_linguistik.R
 
 class HomeFragment : Fragment() {
@@ -30,11 +31,8 @@ class HomeFragment : Fragment() {
         tvTransWordToday = root.findViewById(R.id.tv_transwordtoday)
         tvKbbiToday = root.findViewById(R.id.tv_kbbitoday)
         tvTransKbbiToday = root.findViewById(R.id.tv_transkbbiwordtoday)
-        /*
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
+
+        //homeViewModel.readDataToDay(MainActivity())
         return root
     }
 
@@ -49,9 +47,23 @@ class HomeFragment : Fragment() {
                         "alat untuk menghapus tulisan pada papan tulis dan sebagainya",
                         "alat untuk membuat garis")
         val ranNumb = (0..4).random()
-        tvWordtoday.text = vocab[ranNumb]
-        tvTransWordToday.text = transVocab[ranNumb]
-        tvKbbiToday.text = kbbi[ranNumb]
-        tvTransKbbiToday.text = transKbbi[ranNumb]
+
+        //homeViewModel.translateWord(transVocab[1])
+        //homeViewModel.translateUsingKBBI(kbbi[1])
+
+        homeViewModel.getDataToDay()
+
+        homeViewModel.dataResultTrans.observe(viewLifecycleOwner, Observer {
+            tvTransWordToday.text = it
+        })
+        homeViewModel.dataResultKbbi.observe(viewLifecycleOwner, Observer {
+            tvTransKbbiToday.text = it
+        })
+
+
+        tvWordtoday.text = transVocab[1]
+        //tvTransWordToday.text = transVocab[ranNumb]
+        tvKbbiToday.text = kbbi[1]
+        //tvTransKbbiToday.text = transKbbi[ranNumb]
     }
 }
