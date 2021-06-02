@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
@@ -66,16 +67,33 @@ class NotifReminderReceiver : BroadcastReceiver() {
 
     fun setRepeatingAlarm(context: Context) {
 
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        /* val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, NotifReminderReceiver::class.java)
         intent.putExtra(EXTRA_MESSAGE, "Jangan lupa untuk menambah kosa kata")
 
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 21)
-        calendar.set(Calendar.MINUTE, 55)
+        calendar.set(Calendar.HOUR_OF_DAY, 20)
+        calendar.set(Calendar.MINUTE, 29)
         calendar.set(Calendar.SECOND, 0)
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING, intent, 0)
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 10000+calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 10000+calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)*/
+
+        val intent = Intent(context, NotifReminderReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 123, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val delay =  1 * 1 * 60 * 1000L
+//        val delaytest : Long = 2000
+        val futureInMillis = SystemClock.elapsedRealtime() + delay
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent)
+
+    }
+
+    fun isAlarmSet(context: Context): Boolean {
+        val intent = Intent(context, NotifReminderReceiver::class.java)
+        val requestCode = ID_REPEATING
+
+        return PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_NO_CREATE) != null
     }
 }

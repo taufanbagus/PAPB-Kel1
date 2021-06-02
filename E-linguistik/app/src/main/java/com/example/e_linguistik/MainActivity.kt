@@ -21,6 +21,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -29,6 +30,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.e_linguistik.data.WordGroup.listWordGroupData
 import com.example.e_linguistik.ui.history.HistoryFragment
 import com.example.e_linguistik.ui.home.HomeFragment
+import com.example.e_linguistik.ui.home.HomeViewModel
 import com.example.e_linguistik.ui.translator.TranslatorFragment
 import com.example.e_linguistik.ui.translator.TranslatorViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,6 +42,7 @@ import java.io.InputStreamReader
 class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var mainViewModel: MainActivityVIewModel
 
     companion object {
         private const val JOB_ID = 10
@@ -67,68 +70,26 @@ class MainActivity : AppCompatActivity(){
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_home, R.id.nav_translator, R.id.nav_kbbi, R.id.nav_history), drawerLayout)
 
-        //var notifReminderReceiver = NotifReminderReceiver()
-        //notifReminderReceiver.setRepeatingAlarm(this)
-        //Log.e("set notif","notif berhasil di set")
+        var notifReminderReceiver = NotifReminderReceiver()
+        notifReminderReceiver.setRepeatingAlarm(this)
+        if (notifReminderReceiver.isAlarmSet(this)){
+            Log.e("set notif","notif berhasil di set")
+        } else {
+            Log.e("set notif", "notif tidak diset")
+        }
+
         //startJob()
-        readTxtfile(this)
+        mainViewModel = ViewModelProvider(this).get(MainActivityVIewModel::class.java)
+        mainViewModel.readFileTxt(this)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
-    private fun readTxtfile(activity: Activity) {
-        //val label: MutableList<String> = ArrayList()
-        val reader = BufferedReader(InputStreamReader(activity.getAssets().open("corpus.txt")))
-        val inputString = reader.use { it.readText() }
-        var line: String
-        //while (reader.readLine().also { line = it } != null) {
-        //   listWordGroupData.add(line)
-        //}
-        listWordGroupData = inputString.split("\n")
-    }
-
-    private fun startJob() {
-        if (isJobRunning(this)) {
-            return
-        }
-        val mServiceComponent = ComponentName(this, DailyNotifJobService::class.java)
-
-        val builder = JobInfo.Builder(JOB_ID, mServiceComponent)
-       // builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-        builder.setRequiresDeviceIdle(false)
-        builder.setRequiresCharging(false)
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            builder.setPeriodic(60000) //15 menit
-        } else {
-            builder.setPeriodic(60000) //3 menit
-        }
-
-        val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-        scheduler.schedule(builder.build())
-    }
-
-    private fun isJobRunning(context: Context): Boolean {
-        var isScheduled = false
-
-        val scheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-
-        for (jobInfo in scheduler.allPendingJobs) {
-            if (jobInfo.id == JOB_ID) {
-                isScheduled = true
-                break
-            }
-        }
-
-        return isScheduled
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    /* override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
-    }
-
+    }*/
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)

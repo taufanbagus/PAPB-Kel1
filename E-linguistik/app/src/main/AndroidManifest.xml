@@ -12,11 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ELinguistik">
-        <receiver
-            android:name=".NotifReminderReceiver"
-            android:enabled="true"
-            android:exported="true">
-        </receiver>
 
         <activity android:name=".ui.aboutme.DetailBiografi" />
         <activity android:name=".ui.aboutme.AboutMe" />
@@ -30,6 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".NotifReminderReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
     </application>
 
 </manifest>
