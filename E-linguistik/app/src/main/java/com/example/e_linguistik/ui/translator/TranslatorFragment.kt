@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.e_linguistik.DI.Dependencies
 import com.example.e_linguistik.R
 import com.example.e_linguistik.db.HistoryDatabase
 import com.example.e_linguistik.db.HistoryModel
@@ -42,7 +43,8 @@ class TranslatorFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dataSource = HistoryDatabase.getInstance(application).historyDatabaseDao
+        //val dataSource = HistoryDatabase.getInstance(application).historyDatabaseDao
+        val dataSource = Dependencies().DatabaseKoin.historyDatabaseDao
         val viewModelFactory = TranslatorViewModelFactory(dataSource, application)
         translatorViewModel = ViewModelProvider(this, viewModelFactory).get(TranslatorViewModel::class.java)
         val BASE_URL_TRANSLATOR = "https://amm-api-translate.herokuapp.com/"

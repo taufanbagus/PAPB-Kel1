@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import com.example.e_linguistik.DI.Dependencies
 import com.example.e_linguistik.R
 import com.example.e_linguistik.db.HistoryDatabase
 import com.example.e_linguistik.db.HistoryModel
@@ -46,7 +47,8 @@ class KbbiFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dataSource = HistoryDatabase.getInstance(application).historyDatabaseDao
+        //val dataSource = HistoryDatabase.getInstance(application).historyDatabaseDao
+        val dataSource = Dependencies().DatabaseKoin.historyDatabaseDao
         val viewModelFactory = KBBIViewModelFactory(dataSource, application)
         kbbiViewModel = ViewModelProvider(this, viewModelFactory).get(KbbiViewModel::class.java)
 

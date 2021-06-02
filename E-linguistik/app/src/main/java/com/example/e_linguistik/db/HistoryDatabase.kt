@@ -14,62 +14,6 @@ import kotlinx.coroutines.launch
 abstract  class HistoryDatabase:RoomDatabase(){
 
     abstract val historyDatabaseDao: HistoryDatabaseDao
-    /*
-    companion object{
-
-        @Volatile
-        private var INSTANCE: HistoryDatabase? = null
-
-        fun getDatabase(
-                context: Context,
-                scope: CoroutineScope
-        ): HistoryDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
-            return INSTANCE ?: synchronized(this) {
-                val instance = databaseBuilder(
-                        context.applicationContext,
-                        HistoryDatabase::class.java,
-                        "word_database"
-                )
-                        // Wipes and rebuilds instead of migrating if no Migration object.
-                        // Migration is not part of this codelab.
-                        .fallbackToDestructiveMigration()
-                        .addCallback(HistoryDatabaseCallback(scope))
-                        .build()
-                INSTANCE = instance
-                // return instance
-                instance
-            }
-        }
-
-        private class HistoryDatabaseCallback(
-                private val scope: CoroutineScope
-        ) : RoomDatabase.Callback() {
-            /**
-             * Override the onCreate method to populate the database.
-             */
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-                // If you want to keep the data through app restarts,
-                // comment out the following line.
-                INSTANCE?.let { database ->
-                    scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.historyDatabaseDao())
-                    }
-                }
-            }
-
-            suspend fun populateDatabase(historydao: HistoryDatabaseDao) {
-                // Start the app with a clean database every time.
-                // Not needed if you only populate on creation.
-                historydao.deleteAll()
-
-            }
-        }
-    }
-
-     */
 
     companion object {
         @Volatile
