@@ -74,11 +74,13 @@ class TranslatorFragment : Fragment() {
                     val res = response.body()!!
                     translatedWord.text = res.data.result
                     translatorResult = res.data.result
+
+                   // Log.e("translateData","hasil translate" + translatorResult)
+                    val history = HistoryModel(originWord = input,resultWordTranslation = translatorResult,typeTranslation = "Translate")
+                    translatorViewModel.insert(history)
                 }
             })
-            Log.e("translateData","hasil translate" + translatorResult)
-            val history = HistoryModel(originWord = input,resultWordTranslation = translatorResult,typeTranslation = "Translate")
-            translatorViewModel.insert(history)
+
         }
         return root
     }

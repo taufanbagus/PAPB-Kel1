@@ -76,27 +76,23 @@ class KbbiFragment : Fragment() {
                     val res = response.body()!!
                     val kbbistringBuilder = StringBuilder()
                     val arrDef = res.kateglo.definition
+                    var i = 1
                     for(kbbiDef in arrDef){
-                        kbbistringBuilder.append(kbbiDef.def_text)
+                        kbbistringBuilder.append(i.toString() + ". " + kbbiDef.def_text)
                         kbbistringBuilder.append(".\n")
+                        kbbistringBuilder.append("\n")
+                        i = i+1
                     }
                     //Log.e("Respone Kbbi", "onResponse: "+kbbistringBuilder )
                     artiKbbi.text = kbbistringBuilder
                     kbbiResult = kbbistringBuilder.toString()
+
+                    //Log.e("KBBIData","hasil translate" + kbbiResult)
+                    val history = HistoryModel(originWord = value, resultWordTranslation = kbbiResult, typeTranslation = "KBBI")
+                    kbbiViewModel.insert(history)
                 }
             })
 
-            Log.e("KBBIData","hasil translate" + kbbiResult)
-            //kbbiViewModel.getBaseOnValue("minum")
-
-            //kbbiViewModel.cekWord.observe(viewLifecycleOwner, Observer {
-                //a = it.originWord
-            //    Log.e("cek query khusus", it.toString())
-            //})
-
-            //Log.e("cek query khusus", a)
-            val history = HistoryModel(originWord = value, resultWordTranslation = kbbiResult, typeTranslation = "KBBI")
-            kbbiViewModel.insert(history)
         }
 
 
