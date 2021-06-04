@@ -1,155 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="32dp"
-            app:cardBackgroundColor="#008be8"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="8dp">
-            <LinearLayout
+            android:layout_marginTop="16dp">
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_wordtoday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_transwordtoday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="8dp"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#050F49"
-            app:cardCornerRadius="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:layout_gravity="center"
-                android:text="Word of Today"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                app:cardBackgroundColor="#008be8"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="vertical">
 
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/tv_wordtoday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
-    </FrameLayout>
+                    <TextView
+                        android:id="@+id/tv_transwordtoday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+                </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="#050F49"
+                app:cardCornerRadius="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_gravity="center"
+                    android:text="Word of Today"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="32dp"
-            app:cardBackgroundColor="#008be8"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="8dp">
-            <LinearLayout
+            android:layout_marginTop="16dp">
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/tv_kbbitoday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="18dp" />
-
-                <TextView
-                    android:id="@+id/tv_transkbbiwordtoday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="8dp"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#050F49"
-            app:cardCornerRadius="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:text="KBBI hari ini"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                app:cardBackgroundColor="#008be8"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_kbbitoday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
 
-        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/tv_transkbbiwordtoday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"/>
 
-    </FrameLayout>
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="#050F49"
+                app:cardCornerRadius="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="KBBI hari ini"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+    </LinearLayout>
+</ScrollView>

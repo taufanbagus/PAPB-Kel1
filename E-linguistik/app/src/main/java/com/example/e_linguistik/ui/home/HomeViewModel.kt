@@ -66,9 +66,12 @@ class HomeViewModel : ViewModel() {
                     val res = response.body()!!
                     val kbbistringBuilder = StringBuilder()
                     val arrDef = res.kateglo.definition
+                    var i = 1
                     for(kbbiDef in arrDef){
-                        kbbistringBuilder.append(kbbiDef.def_text)
+                        kbbistringBuilder.append(i.toString() + ". " + kbbiDef.def_text)
                         kbbistringBuilder.append(".\n")
+                        kbbistringBuilder.append("\n")
+                        i = i+1
                     }
                     Log.e("cek kbbi", listWordGroupData[number])
                     Log.e("cek kbbi",kbbistringBuilder.toString())

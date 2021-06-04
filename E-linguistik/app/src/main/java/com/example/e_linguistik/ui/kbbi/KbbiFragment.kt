@@ -48,64 +48,27 @@ class KbbiFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        //val dataSource = HistoryDatabase.getInstance(application).historyDatabaseDao
         val dataSource = Dependencies().DatabaseKoin.historyDatabaseDao
         val viewModelFactory = KBBIViewModelFactory(dataSource, application)
         kbbiViewModel = ViewModelProvider(this, viewModelFactory).get(KbbiViewModel::class.java)
 
-        val BASE_URL_KBBI = "https://kateglo.com/"
-
         btnTranslate.setOnClickListener {
 
             val value = edtTransKbbi.text.toString()
-            val retrofiBuilder = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BASE_URL_KBBI)
-                .build()
-                .create(KbbiAPIInterface::class.java)
-
-            val kbbiData = retrofiBuilder.getData("json", value)
-            var kbbiResult: String = ""
-
-            kbbiData.enqueue(object : Callback<KbbiData?> {
-                override fun onFailure(call: Call<KbbiData?>, t: Throwable) {
-                    Log.e("kbbiData", "onFailure: "+t.message)
-                }
-
-                override fun onResponse(call: Call<KbbiData?>, response: Response<KbbiData?>) {
-                    val res = response.body()!!
-                    val kbbistringBuilder = StringBuilder()
-                    val arrDef = res.kateglo.definition
-                    var i = 1
-                    for(kbbiDef in arrDef){
-                        kbbistringBuilder.append(i.toString() + ". " + kbbiDef.def_text)
-                        kbbistringBuilder.append(".\n")
-                        kbbistringBuilder.append("\n")
-                        i = i+1
-                    }
-                    //Log.e("Respone Kbbi", "onResponse: "+kbbistringBuilder )
-                    artiKbbi.text = kbbistringBuilder
-                    kbbiResult = kbbistringBuilder.toString()
-
-                    //Log.e("KBBIData","hasil translate" + kbbiResult)
-                    val history = HistoryModel(originWord = value, resultWordTranslation = kbbiResult, typeTranslation = "KBBI")
-                    kbbiViewModel.insert(history)
-                }
+            kbbiViewModel.translateUsingKBBI(value)
+            kbbiViewModel.dataResultKbbi.observe(viewLifecycleOwner, Observer {
+                artiKbbi.text = it
+                val history = HistoryModel(originWord = value, resultWordTranslation = it, typeTranslation = "KBBI")
+                kbbiViewModel.insert(history)
             })
 
         }
-
-
-//        fun getKbbiData(){
-//
-//        }
 
         return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //kbbiViewModel = ViewModelProvider(this).get(KbbiViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

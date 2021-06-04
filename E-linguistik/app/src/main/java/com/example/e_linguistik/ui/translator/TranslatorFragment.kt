@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.example.e_linguistik.DI.Dependencies
 import com.example.e_linguistik.R
 import com.example.e_linguistik.db.HistoryDatabase
@@ -49,40 +50,15 @@ class TranslatorFragment : Fragment() {
         //url Documentation API https://github.com/azharimm/api-translate
         //url API https://amm-api-translate.herokuapp.com/translate?engine={engine}&text={text}&to={to}
 
-        val BASE_URL_TRANSLATOR = "https://amm-api-translate.herokuapp.com/"
-
         //fungsi yang berjalan ketika tombol "terjemahkan" diklik
         btnTranslate.setOnClickListener {
 
             val input = edtTranslator.text.toString()
-
-            //setup retrofit
-            val retrofiBuilder = Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(BASE_URL_TRANSLATOR)
-                    .build()
-                    .create(TranslatorAPIInterface::class.java)
-
-            //set parameter API
-            val translatorData = retrofiBuilder.getData("google", input, "en",)
-            var translatorResult: String = ""
-
-            translatorData.enqueue(object : Callback<TranslatorData?> {
-                override fun onFailure(call: Call<TranslatorData?>, t: Throwable) {
-                    Log.e("translatorData", "onFailure: "+t.message)
-                }
-
-                //Menerima dan menyimpan respon dari API
-                override fun onResponse(call: Call<TranslatorData?>, response: Response<TranslatorData?>) {
-                    val res = response.body()!!
-                    translatedWord.text = res.data.result
-                    translatorResult = res.data.result
-
-                    //Mengirim input kata dan hasil terjemahan ke database
-                    //Log.e("translateData","hasil translate" + translatorResult)
-                    val history = HistoryModel(originWord = input,resultWordTranslation = translatorResult,typeTranslation = "Translate")
-                    translatorViewModel.insert(history)
-                }
+            translatorViewModel.translateWord(input)
+            translatorViewModel.dataResultTrans.observe(viewLifecycleOwner, Observer {
+                translatedWord.text = it
+                val history = HistoryModel(originWord = input,resultWordTranslation = it,typeTranslation = "Translate")
+                translatorViewModel.insert(history)
             })
 
         }

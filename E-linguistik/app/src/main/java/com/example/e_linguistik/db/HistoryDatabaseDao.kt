@@ -26,7 +26,7 @@ interface HistoryDatabaseDao {
     @Query("SELECT * FROM history_table WHERE origin_word LIKE :word AND type_translation LIKE :type")
     fun getSpecificValue(word: String, type: String): LiveData<HistoryModel>
 
-    @Query("DELETE FROM history_table WHERE origin_word LIKE :word")
-    suspend fun deletSpecificValue(word: String)
+    @Query("DELETE FROM history_table WHERE origin_word LIKE :word AND type_translation LIKE :type")
+    suspend fun deletSpecificValue(word: String, type: String)
 
 }
