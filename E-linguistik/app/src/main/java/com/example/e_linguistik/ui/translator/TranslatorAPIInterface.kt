@@ -8,6 +8,5 @@ import retrofit2.http.Query
 
 interface TranslatorAPIInterface {
     @GET("translate")
-//    fun getData(engine: String = "google", to: String = "en"):Call<TranslatorData>
     fun getData(@Query("engine") engine: String, @Query("text") text: String, @Query("to") word: String): Call<TranslatorData>
 }

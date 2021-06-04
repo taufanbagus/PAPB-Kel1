@@ -42,27 +42,29 @@ class TranslatorFragment : Fragment() {
         val translatedWord: TextView =  root.findViewById(R.id.rvListTranslation)
 
         val application = requireNotNull(this.activity).application
-
-        //val dataSource = HistoryDatabase.getInstance(application).historyDatabaseDao
         val dataSource = Dependencies().DatabaseKoin.historyDatabaseDao
         val viewModelFactory = TranslatorViewModelFactory(dataSource, application)
         translatorViewModel = ViewModelProvider(this, viewModelFactory).get(TranslatorViewModel::class.java)
+
+        //url Documentation API https://github.com/azharimm/api-translate
+        //url API https://amm-api-translate.herokuapp.com/translate?engine={engine}&text={text}&to={to}
+
         val BASE_URL_TRANSLATOR = "https://amm-api-translate.herokuapp.com/"
 
-//      url Documentation API https://github.com/azharimm/api-translate
-//      url API https://amm-api-translate.herokuapp.com/translate?engine={engine}&text={text}&to={to}
-
+        //fungsi yang berjalan ketika tombol "terjemahkan" diklik
         btnTranslate.setOnClickListener {
 
             val input = edtTranslator.text.toString()
+
+            //setup retrofit
             val retrofiBuilder = Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl(BASE_URL_TRANSLATOR)
                     .build()
                     .create(TranslatorAPIInterface::class.java)
 
+            //set parameter API
             val translatorData = retrofiBuilder.getData("google", input, "en",)
-
             var translatorResult: String = ""
 
             translatorData.enqueue(object : Callback<TranslatorData?> {
@@ -70,12 +72,14 @@ class TranslatorFragment : Fragment() {
                     Log.e("translatorData", "onFailure: "+t.message)
                 }
 
+                //Menerima dan menyimpan respon dari API
                 override fun onResponse(call: Call<TranslatorData?>, response: Response<TranslatorData?>) {
                     val res = response.body()!!
                     translatedWord.text = res.data.result
                     translatorResult = res.data.result
 
-                   // Log.e("translateData","hasil translate" + translatorResult)
+                    //Mengirim input kata dan hasil terjemahan ke database
+                    //Log.e("translateData","hasil translate" + translatorResult)
                     val history = HistoryModel(originWord = input,resultWordTranslation = translatorResult,typeTranslation = "Translate")
                     translatorViewModel.insert(history)
                 }
