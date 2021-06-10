@@ -18,6 +18,8 @@ class DetailBiografi : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_biografi)
 
+        supportActionBar?.title = "About Me"
+
         val index = intent.getIntExtra(EXTRA_INDEX, 0)
         biografiViewModel = ViewModelProvider(this).get(BiografiViewModel::class.java)
         biografiViewModel.getBioDetail(index)

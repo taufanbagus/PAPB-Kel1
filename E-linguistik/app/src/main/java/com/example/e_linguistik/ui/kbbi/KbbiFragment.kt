@@ -55,13 +55,16 @@ class KbbiFragment : Fragment() {
         btnTranslate.setOnClickListener {
 
             val value = edtTransKbbi.text.toString()
-            kbbiViewModel.translateUsingKBBI(value)
-            kbbiViewModel.dataResultKbbi.observe(viewLifecycleOwner, Observer {
-                artiKbbi.text = it
-                val history = HistoryModel(originWord = value, resultWordTranslation = it, typeTranslation = "KBBI")
-                kbbiViewModel.insert(history)
-            })
-
+            if (value.isEmpty()){
+                edtTransKbbi.error = "Kata belum dimasukkan"
+            } else {
+                kbbiViewModel.translateUsingKBBI(value)
+                kbbiViewModel.dataResultKbbi.observe(viewLifecycleOwner, Observer {
+                    artiKbbi.text = it
+                    val history = HistoryModel(originWord = value, resultWordTranslation = it, typeTranslation = "KBBI")
+                    kbbiViewModel.insert(history)
+                })
+            }
         }
 
         return root

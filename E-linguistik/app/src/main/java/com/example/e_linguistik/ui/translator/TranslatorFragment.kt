@@ -54,13 +54,16 @@ class TranslatorFragment : Fragment() {
         btnTranslate.setOnClickListener {
 
             val input = edtTranslator.text.toString()
-            translatorViewModel.translateWord(input)
-            translatorViewModel.dataResultTrans.observe(viewLifecycleOwner, Observer {
-                translatedWord.text = it
-                val history = HistoryModel(originWord = input,resultWordTranslation = it,typeTranslation = "Translate")
-                translatorViewModel.insert(history)
-            })
-
+            if (input.isEmpty()){
+                edtTranslator.error = "Kata belum dimasukkan"
+            } else {
+                translatorViewModel.translateWord(input)
+                translatorViewModel.dataResultTrans.observe(viewLifecycleOwner, Observer {
+                    translatedWord.text = it
+                    val history = HistoryModel(originWord = input,resultWordTranslation = it,typeTranslation = "Translate")
+                    translatorViewModel.insert(history)
+                })
+            }
         }
         return root
     }

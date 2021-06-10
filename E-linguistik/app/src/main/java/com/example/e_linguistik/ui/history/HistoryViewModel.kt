@@ -16,11 +16,18 @@ class HistoryViewModel(
     lateinit var hist: LiveData<List<HistoryModel>>
 
     init {
+        deleteDuplicateData()
         getHist()
     }
     fun getHist(){
         viewModelScope.launch {
             hist = database.getAllHistory()
+        }
+    }
+
+    fun deleteDuplicateData(){
+        viewModelScope.launch {
+            database.deleteDUplicate()
         }
     }
 

@@ -29,4 +29,7 @@ interface HistoryDatabaseDao {
     @Query("DELETE FROM history_table WHERE origin_word LIKE :word AND type_translation LIKE :type")
     suspend fun deletSpecificValue(word: String, type: String)
 
+    @Query("DELETE FROM history_table WHERE historyId NOT IN (SELECT MAX(historyId) FROM history_table GROUP BY origin_word, type_translation)")
+    suspend fun deleteDUplicate()
+
 }
